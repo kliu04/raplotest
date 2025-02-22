@@ -2,12 +2,13 @@
 (require racket/file)
 
 (provide start-repl)
+  (define last-prompt #f)
+  (define last-output #f)
 ;; must take in path to write to
 ;; TODO: make filepath a parameter?
 (define (start-repl filepath)
   ;; previous repl io
-  (define last-prompt #f)
-  (define last-output #f)
+
   (parameterize ([current-prompt-read 
                   (λ ()
                     (print "raplotest> ")
@@ -24,12 +25,14 @@
                 
                  [current-print 
                   (λ (result)
-                    (set! last-output result)
+                    (if (list? result)
+                        (set! last-output `(quote ,result))
+                        (set! last-output result))
                     (unless (void? result) 
                       (println result)))])
     (read-eval-print-loop)))
 
 (define (write-test prompt output filepath)
   (define out (open-output-file filepath #:exists 'append))
-  (writeln `(check-equal? ,prompt ',output) out)
+  (writeln `(check-equal? ,prompt ,output) out)
   (close-output-port out))
