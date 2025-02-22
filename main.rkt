@@ -10,7 +10,7 @@
   (define last-output #f)
   (parameterize ([current-prompt-read 
                   (λ ()
-                    (display "raplotest> ")
+                    (print "raplotest> ")
                     (flush-output)
                     (define input (read))
                     (cond
@@ -26,8 +26,8 @@
                   (λ (result)
                     (set! last-output result)
                     (unless (void? result) 
-                      (writeln result)))])
+                      (println result)))])
     (read-eval-print-loop)))
 
 (define (write-test prompt output filepath)
-  (display-to-file (format "\n(check-equal? ~a ~a)\n" prompt output) filepath #:exists 'append))
+  (print-to-file (format "\n(check-equal? ~a ~a)\n" prompt output) filepath #:exists 'append))
