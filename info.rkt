@@ -6,4 +6,4 @@
 (define pkg-desc " Automatically convert REPL output into unit tests.")
 (define version "1.0")
 (define pkg-authors '(wevie))
-(define license 'GPL-3.0-or-later)
+(define license 'LGPL-3.0-or-later)
