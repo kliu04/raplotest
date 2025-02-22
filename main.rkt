@@ -30,4 +30,6 @@
     (read-eval-print-loop)))
 
 (define (write-test prompt output filepath)
-  (print-to-file (format "\n(check-equal? ~a ~a)\n" prompt output) filepath #:exists 'append))
+  (define out (open-output-file filepath #:exists 'append))
+  (writeln `(check-equal? ,prompt ',output) out)
+  (close-output-port out))
