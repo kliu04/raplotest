@@ -15,3 +15,5 @@ Start the custom REPL with `start-repl` followed by the path to write to, e.g.,
 Enter `!` in the custom REPL to create a new unit test from the last statement. 
 
 TODO: probably want make sure last command doesn't error...
+
+TODO: make up/down arrow work in REPL.
